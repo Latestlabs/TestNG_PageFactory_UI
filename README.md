@@ -1,2 +1,2 @@
 # TestNG_PageFactory_UI
-This framework is based on PageFactory approach which uses testng framework for automating the tests
+This is a generic automation test framework that can be downloaded and implemented for automation of UI applications based on Pageobject model design pattern using TestNG
