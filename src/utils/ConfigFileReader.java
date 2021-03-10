@@ -7,13 +7,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Properties;
 
-enum BROWSERS
-{
-	CHROME,
-	FIREFOX,
-	IE,
-	SAFARI
-}
+
 
 
 
@@ -36,6 +30,11 @@ public class ConfigFileReader
 		{
 			System.out.println(e1.getMessage());
 		}
+	}
+	
+	public static String getURL()
+	{
+		return appConfig.getProperty("Appurl");
 	}
 	
 	
