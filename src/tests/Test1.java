@@ -1,44 +1,43 @@
 package tests;
 
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
-public class Test1 {
+import pages.Page1;
+import utils.Hooks;
+
+public class Test1 extends Hooks{
 	
+	Page1 LoginPage;
 	
-	@BeforeSuite
-	public void SuiteLevel()
+	@Test
+	public void VerifyUserLoginWithMultipleData()
+	{
+		
+	}
+	
+	@Test
+	public void VerifyUserLoginWithInvalidDetails()
 	{
 		
 	}
 	
 	
-	@BeforeTest
-	public void TestLeve()
+	@Test
+	public void VerifyForgotPassword()
 	{
 		
 	}
 	
-	@BeforeClass
-	public void ClassLevel()
+	@Test
+	public void VerifyPageTitle()
 	{
 		
 	}
 	
-	@BeforeMethod
-	public void MethodLevel()
+	@Test
+	public void VerifyUserSignUpIsSuccessful()
 	{
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

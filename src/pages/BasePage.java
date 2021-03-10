@@ -10,9 +10,6 @@ import utils.*;
 public class BasePage extends Page {
 	
 	protected static WebElement element=null;
-	
-	
-	
 
 	protected void MoveBack() {
 		// TODO Auto-generated method stub
