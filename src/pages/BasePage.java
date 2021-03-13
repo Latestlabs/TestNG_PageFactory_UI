@@ -1,15 +1,23 @@
 package pages;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+
 import utils.*;
 
 public class BasePage extends Page {
 	
 	protected static WebElement element=null;
+	private Select selement=null;
+
 
 	protected void MoveBack() {
 		// TODO Auto-generated method stub
@@ -28,7 +36,7 @@ public class BasePage extends Page {
 
 	public void Click() {
 		// TODO Auto-generated method stub
-		PageManager.getDriver().navigate().back();
+		element.click();
 	}
 
 	public boolean SetText(String text) {
@@ -49,27 +57,66 @@ public class BasePage extends Page {
 
 	public boolean SelectDropdownValue(String Value, String Type) {
 		// TODO Auto-generated method stub
-		return true;
+		selement=new Select(element);
+		switch (Type)
+		{
+		case "ByValue":
+			selement.selectByValue(Value);
+			break;
+		case "ByText":
+			selement.selectByVisibleText(Value);
+			break;
+		case "ByIndex":
+			selement.selectByIndex(Integer.parseInt(Value));
+			break;
+		}
+		
+		return selement.getFirstSelectedOption().getText().equals(Value);
 	}
 
 	public ArrayList<String> GetDropdownValues() {
 		// TODO Auto-generated method stub
-		return null;
+		selement=new Select(element);
+		
+		return (ArrayList<String>) selement.getOptions().iterator();
 	}
 
-	public HashSet<String> GetDistinctDropdownValues() {
+	public LinkedHashSet<String> GetDistinctDropdownValues() {
 		// TODO Auto-generated method stub
-		return null;
+		return new LinkedHashSet<String>(GetDropdownValues());
 	}
 
 	public SortedSet<String> GetDropdownValues(String SortType) {
 		// TODO Auto-generated method stub
-		return null;
-	}
+		SortedSet<String> sortList=null;
+		if(SortType.equals("ASC"))
+		{
+		sortList=new TreeSet<String>(GetDropdownValues());
+		}
+		else
+		{
+		sortList=new TreeSet<String>(Collections.reverseOrder());
+		sortList.addAll(GetDropdownValues());
+		}
+		
+		return sortList;
+		}
 
 	public SortedSet<String> GetDistinctDropdownValues(String SortType) {
 		// TODO Auto-generated method stub
-		return null;
+		SortedSet<String> sortList=null;
+		if(SortType.equals("ASC"))
+		{
+		sortList=new TreeSet<String>(GetDistinctDropdownValues());
+		}
+		else
+		{
+		sortList=new TreeSet<String>(Collections.reverseOrder());
+		sortList.addAll(GetDistinctDropdownValues());
+		}
+		
+		return sortList;
+		
 	}
 
 	public boolean UploadFile(String FilePath) {
@@ -144,16 +191,15 @@ public class BasePage extends Page {
 		return false;
 	}
 
-	public String Minimize() {
+	public void Minimize() {
 		// TODO Auto-generated method stub
-		return null;
+		PageManager.getDriver().manage().window();
 	}
 
-	public String Maximize() {
+	public void Maximize() {
 		// TODO Auto-generated method stub
-		return null;
+		PageManager.getDriver().manage().window().maximize();
 	}
-
 	public boolean SelectRadioButton(String Value) {
 		// TODO Auto-generated method stub
 		return false;

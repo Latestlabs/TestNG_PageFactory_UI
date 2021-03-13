@@ -15,8 +15,8 @@ public abstract class Page
 	 abstract protected String GetAlertContent();
      abstract protected void SetAlertContent(String text);
      abstract protected String MouseOverAndGetValue(String TypeOfValue);
-     abstract protected String Minimize();
-     abstract protected String Maximize();
+     abstract protected void Minimize();
+     abstract protected void Maximize();
      abstract protected ArrayList<String> GetSelectedValues();
      abstract protected ArrayList<String> GetDropdownValues();
      abstract protected HashSet<String> GetDistinctDropdownValues();
