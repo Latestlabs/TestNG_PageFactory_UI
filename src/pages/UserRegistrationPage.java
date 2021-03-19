@@ -1,5 +1,7 @@
 package pages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -68,7 +70,7 @@ public class UserRegistrationPage extends BasePage{
 	
 	public void load()
 	{
-	   this.NavigateTo(URL);
+	   this.LoadPage(URL);
 	}
 	
 	
@@ -159,37 +161,20 @@ public class UserRegistrationPage extends BasePage{
 		this.Click();
 	}
 	
-	public boolean validateErrorMessage(String FieldName,String ErrorMessage)
+	public boolean IsErrorDisplayed(String FieldName)
 	{
-		WebElement Error=PageManager.getDriver().findElement(By.xpath("//td[contains(text(),'"+ FieldName +"')]/following-sibling::td[3]/span"));
-		boolean iserror=false;
-		if(Error.isDisplayed())
-		{
-		   if(Error.getText()==ErrorMessage)
-		    {
-		    	iserror=true;
-		    }
-		}
-		else
-		{
-			throw new RuntimeException("No Error Message validation");
-		}
-		
-		return iserror;
+		List<WebElement> Error=PageManager.getDriver().findElements(By.xpath("//td[contains(text(),'"+ FieldName +"')]/following-sibling::td/i"));
+		//System.out.println("//td[contains(text(),'"+ FieldName +"')]/following-sibling::td/i"+Error.size());
+		return Error.size()!=0;
 	}
 	
-	public boolean isError(String FieldName)
+	public String getErrorMessage(String FieldName)
 	{
-		WebElement Error=PageManager.getDriver().findElement(By.xpath("//td[contains(text(),'"+ FieldName +"')]/following-sibling::td/i"));
-		boolean iserror=false;
+		WebElement Error=PageManager.getDriver().findElement(By.xpath("//td[contains(text(),'"+ FieldName +"')]/following-sibling::td[3]/span"));
+		element=Error;
+		//System.out.println("//td[contains(text(),'"+ FieldName +"')]/following-sibling::td/i" + this.GetText());
+		return this.GetText();
 		
-		   if(Error.getAttribute("style")=="color:red;")
-		    {
-		    	iserror=true;
-		    }
-	
-		
-		return iserror;
 	}
 	
 }

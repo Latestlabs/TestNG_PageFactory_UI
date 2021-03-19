@@ -14,7 +14,7 @@ public class PageManager {
 		if(driver!=null)
 		return driver;
 		else
-		return driver=DriverManager.getChromeDriver();
+		return driver=BrowserManager.getChromeDriver();
 	}
 		
 	public static WebDriver getDriver(Browsers BrowserName)
@@ -22,19 +22,19 @@ public class PageManager {
 		switch(BrowserName)
 		{
 			case CHROME:
-				driver=DriverManager.getChromeDriver();
+				driver=BrowserManager.getChromeDriver();
 			break;
 			
 			case FIREFOX:
-				driver=DriverManager.getFireFoxDriver();
+				driver=BrowserManager.getFireFoxDriver();
 			break;
 			
 			case IE:
-				driver=DriverManager.getIEDriver();
+				driver=BrowserManager.getIEDriver();
 			break;
 			
 			case SAFARI:
-				driver=DriverManager.getSafariDriver();
+				driver=BrowserManager.getSafariDriver();
 			break;
 			default:
 			   throw new RuntimeException("Browser not found and automation cannot continue");

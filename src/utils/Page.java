@@ -30,7 +30,7 @@ public abstract class Page
      abstract protected boolean RightClick();
      abstract protected boolean MouseOverAndClick(String ClickType,String ClickValue);
      abstract protected boolean ClosePage(String WindowId);
-     abstract protected boolean LoadPage(String URL);
+     abstract protected void LoadPage(String URL);
      abstract protected boolean PageScroll();
      abstract protected boolean PageZoom(String Type);
      abstract protected boolean SelectRadioButton(String Value);

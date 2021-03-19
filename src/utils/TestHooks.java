@@ -9,8 +9,13 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 
-public class Hooks {
+import pages.UserRegistrationPage;
 
+public class TestHooks {
+
+	protected UserRegistrationPage usrRegistration=null;
+	
+	
 	@BeforeSuite
 	public void BeforeSuiteLevel()
 	{
@@ -22,6 +27,8 @@ public class Hooks {
 	public void BeforeTestLevel()
 	{
 		System.out.println("Before Test");
+		usrRegistration=PageManager.getUserRegistrationPage();
+		
 	}
 	
 	@BeforeClass
@@ -41,7 +48,7 @@ public class Hooks {
 	@AfterSuite
 	public void AfterSuiteLevel()
 	{
-		System.out.println("After Suite");
+		PageManager.getDriver().quit();
 	}
 	
 	

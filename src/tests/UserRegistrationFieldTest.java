@@ -3,16 +3,21 @@ package tests;
 
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import org.testng.annotations.Test;
 
 import pages.UserRegistrationPage;
-import utils.Hooks;
+import utils.TestHooks;
 import utils.PageManager;
 
-public class UserRegistrationFieldTest extends Hooks{
+public class UserRegistrationFieldTest extends TestHooks{
 	
-	UserRegistrationPage usrRegistration=PageManager.getUserRegistrationPage();
+	public void validateField(String FieldName,String ErrorMessage)
+	{
+		assertTrue(usrRegistration.IsErrorDisplayed(FieldName)==true);
+		assertTrue(usrRegistration.getErrorMessage(FieldName).contains(ErrorMessage));
+	}
 	
 	@Test
 	public void VerifyUserNameCannotHaveSpecialCharacter()
@@ -20,8 +25,7 @@ public class UserRegistrationFieldTest extends Hooks{
 		
 		usrRegistration.load();
 		usrRegistration.setUserName("!@#$%^User");
-		assertEquals(usrRegistration.isError("Username"), true, "Error not displayed");
-		assertEquals(usrRegistration.validateErrorMessage("Username","	username should not contain special characters/spaces"), true, "Error message not displayed");
+		validateField("Username","username should not contain special characters/spaces");
 	}
 	
 	@Test
@@ -31,10 +35,9 @@ public class UserRegistrationFieldTest extends Hooks{
 		usrRegistration.load();
 		usrRegistration.setUserPassword("1");
 		usrRegistration.setConfirmPassword("1");
-		assertEquals(usrRegistration.isError("Password"), true, "Error not displayed");
-		assertEquals(usrRegistration.validateErrorMessage("Password","password should contain minimum 8 letters"), true, "Error message not displayed");
-		assertEquals(usrRegistration.isError("Confirm Password"), true, "Error not displayed");
-		assertEquals(usrRegistration.validateErrorMessage("Confirm Password","password should contain minimum 8 letters"), true, "Error message not displayed");
+		validateField("Password","password should contain minimum 8 letters");
+		validateField("Confirm Password","password should contain minimum 8 letters");
+	
 	}
 	
 		

@@ -10,7 +10,9 @@ import java.util.TreeSet;
 
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import utils.*;
 
@@ -18,7 +20,7 @@ public class BasePage extends Page {
 	
 	protected static WebElement element=null;
 	private Select selement=null;
-	
+	private WebDriverWait explicit_wait= new WebDriverWait(PageManager.getDriver(),5000);
 
 
 	protected void MoveBack() {
@@ -26,14 +28,11 @@ public class BasePage extends Page {
 		PageManager.getDriver().navigate().back();
 	}
 	
-	protected void NavigateTo(String URL)
-	{
-		PageManager.getDriver().get(URL);
-	}
-	
+		
 	protected void PressTab()
 	{
-		element.sendKeys(Keys.TAB);
+		explicit_wait.until(ExpectedConditions.visibilityOf(element)).sendKeys(Keys.TAB);;
+		
 	}
 
 	protected void MoveForward() {
@@ -48,18 +47,18 @@ public class BasePage extends Page {
 
 	protected void Click() {
 		// TODO Auto-generated method stub
-		element.click();
+		explicit_wait.until(ExpectedConditions.visibilityOf(element)).click();
 	}
 
 	protected boolean SetText(String text) {
 		// TODO Auto-generated method stub
-		element.sendKeys(text);
+		explicit_wait.until(ExpectedConditions.visibilityOf(element)).sendKeys(text);
 		return element.getText().equals(text);
 	}
 
 	protected String GetText() {
 		// TODO Auto-generated method stub
-		return element.getText();
+		return explicit_wait.until(ExpectedConditions.visibilityOf(element)).getText();
 	}
 
 	protected String GetPageTitle() {
@@ -69,7 +68,7 @@ public class BasePage extends Page {
 
 	protected boolean SelectDropdownValue(String Value, String Type) {
 		// TODO Auto-generated method stub
-		selement=new Select(element);
+		selement=new Select(explicit_wait.until(ExpectedConditions.visibilityOf(element)));
 		switch (Type)
 		{
 		case "ByValue":
@@ -88,7 +87,7 @@ public class BasePage extends Page {
 
 	protected ArrayList<String> GetDropdownValues() {
 		// TODO Auto-generated method stub
-		selement=new Select(element);
+		selement=new Select(explicit_wait.until(ExpectedConditions.visibilityOf(element)));
 		
 		return (ArrayList<String>) selement.getOptions().iterator();
 	}
@@ -133,7 +132,7 @@ public class BasePage extends Page {
 
 	protected boolean UploadFile(String FilePath) {
 		// TODO Auto-generated method stub
-		element.sendKeys(FilePath);
+		explicit_wait.until(ExpectedConditions.visibilityOf(element)).sendKeys(FilePath);
 		return element.getText().equals(FilePath);
 	}
 
@@ -188,9 +187,9 @@ public class BasePage extends Page {
 		return false;
 	}
 
-	protected boolean LoadPage(String URL) {
+	protected void LoadPage(String URL) {
 		// TODO Auto-generated method stub
-		return false;
+		PageManager.getDriver().get(URL);
 	}
 
 	protected boolean PageScroll() {
