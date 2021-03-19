@@ -21,7 +21,8 @@ public class ConfigFileReader
 	{
 		try 
 		{
-			FileReader propertyFile= new FileReader("C:\\Users\\Jeevakumar\\eclipse-workspace\\PageFactory_Testng_TestFramework\\configs\\appconfig.properties");
+			
+			FileReader propertyFile= new FileReader(new File(".").getCanonicalPath()+"\\configs\\appconfig.properties");
 			appConfig=new Properties();
 			appConfig.load(propertyFile);
 			
@@ -40,7 +41,15 @@ public class ConfigFileReader
 	
 	public static String getDriverPath()
 	{
-		return appConfig.getProperty("Driverpath");
+		String filepath="";
+		try {
+		filepath=new File(".").getCanonicalPath()+appConfig.getProperty("Driverpath");
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getStackTrace());
+		}
+		return filepath;
 	}
 	
 	public static String getWaitTime()

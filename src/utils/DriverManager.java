@@ -14,10 +14,10 @@ public class DriverManager {
 	private static WebDriver safaridriver=null;
 
 	
-	static WebDriver getChromeDriver()
+	static WebDriver getChromeDriver() 
 	{
-		String FilePath=ConfigFileReader.getDriverPath()+"\\chromedriver.exe";
-		System.setProperty("webdriver.chrome.driver", FilePath);
+		
+		System.setProperty("webdriver.chrome.driver", ConfigFileReader.getDriverPath()+"\\chromedriver.exe");
 		return chromedriver==null?new ChromeDriver():chromedriver;
 	}
 	
