@@ -20,7 +20,7 @@ public class BasePage extends Page {
 	
 	protected static WebElement element=null;
 	private Select selement=null;
-	private WebDriverWait explicit_wait= new WebDriverWait(PageManager.getDriver(),5000);
+	private WebDriverWait explicit_wait= new WebDriverWait(PageManager.getDriver(),ConfigFileReader.getWaitTime());
 
 
 	protected void MoveBack() {

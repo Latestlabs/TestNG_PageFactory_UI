@@ -52,9 +52,9 @@ public class ConfigFileReader
 		return filepath;
 	}
 	
-	public static String getWaitTime()
+	public static int getWaitTime()
 	{
-		return appConfig.getProperty("WAIT_TIME");
+		return Integer.parseInt(appConfig.getProperty("Waittime"));
 	}
 	
 	
