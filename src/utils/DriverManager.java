@@ -16,22 +16,29 @@ public class DriverManager {
 	
 	static WebDriver getChromeDriver()
 	{
+		String FilePath=ConfigFileReader.getDriverPath()+"\\chromedriver.exe";
+		System.setProperty("webdriver.chrome.driver", FilePath);
 		return chromedriver==null?new ChromeDriver():chromedriver;
 	}
 	
 	static WebDriver getFireFoxDriver()
 	{
+		System.setProperty("webdriver.firefox.driver", ConfigFileReader.getDriverPath()+"\\firefoxdriver.exe");
 		return firefoxdriver==null?new FirefoxDriver():firefoxdriver;
 	}
 	
 	static WebDriver getIEDriver()
 	{
+		System.setProperty("webdriver.ie.driver", ConfigFileReader.getDriverPath()+"\\iedriver.exe");
 		return iedriver==null?new InternetExplorerDriver():iedriver;
 	}
 	
 	static WebDriver getSafariDriver()
 	{
+		System.setProperty("webdriver.safari.driver", ConfigFileReader.getDriverPath()+"\\safaridriver.exe");
 		return safaridriver==null?new SafariDriver():safaridriver;
 	}
+	
+	
 	
 }

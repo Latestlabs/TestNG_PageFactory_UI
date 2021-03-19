@@ -1,20 +1,20 @@
 package utils;
 
 import org.openqa.selenium.WebDriver;
-import pages.Page1;
+import pages.UserRegistrationPage;
 
 
 public class PageManager {
 	
 	private static WebDriver driver=null;
-	private static Page1 _page1=null;
+	private static UserRegistrationPage _page1=null;
 	
 	public static WebDriver getDriver()
 	{
 		if(driver!=null)
 		return driver;
 		else
-		throw new RuntimeException("Browser is not initialized for the driver");
+		return driver=DriverManager.getChromeDriver();
 	}
 		
 	public static WebDriver getDriver(Browsers BrowserName)
@@ -43,9 +43,9 @@ public class PageManager {
 		return driver;
 	}
 	
-	public static Page1 getPage1()
+	public static UserRegistrationPage getUserRegistrationPage()
 	{
-		return _page1==null? new Page1(driver):_page1;
+		return _page1==null? new UserRegistrationPage():_page1;
 	}
 	
 
