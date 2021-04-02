@@ -24,7 +24,7 @@ public abstract class Page
      abstract protected SortedSet<String> GetDistinctDropdownValues(String SortType);
      abstract protected boolean UploadFile(String FilePath);
      abstract protected boolean DownloadFile(String FilePath);
-     abstract protected boolean CloseAlert(String Input);
+     abstract protected void CloseAlert();
      abstract protected boolean DoubleClick();
      abstract protected boolean LeftClick();
      abstract protected boolean RightClick();

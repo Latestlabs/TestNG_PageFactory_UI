@@ -5,6 +5,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
@@ -20,42 +21,55 @@ public class UserRegistrationPage extends BasePage{
 	
 	String URL=ConfigFileReader.getURL();
 	
+	@CacheLookup
 	@FindBy(how=How.XPATH,using="//td[contains(text(),'Title')]/following-sibling::td/select")
 	WebElement s_Title;
 	
+	@CacheLookup
 	@FindBy(how=How.XPATH,using="//td[contains(text(),'Username')]/following-sibling::td/input")
 	WebElement t_UserName;
 	
-	@FindBy(how=How.XPATH,using="//td[contains(text(),'Password')]/following-sibling::td/input")
+	@CacheLookup
+	@FindBy(how=How.XPATH,using="//td[text()=' Password']/following-sibling::td/input")
 	WebElement t_Password;
 	
+	@CacheLookup
 	@FindBy(how=How.XPATH,using="//td[contains(text(),'Confirm Password')]/following-sibling::td/input")
 	WebElement t_ConfirmPassword;
 	
+	@CacheLookup
 	@FindBy(how=How.XPATH,using="//td[contains(text(),'Email id')]/following-sibling::td/input")
 	WebElement t_EmailId;
 	
+	@CacheLookup
 	@FindBy(how=How.XPATH,using="//td[contains(text(),'Confirm Email id')]/following-sibling::td/input")
 	WebElement t_ConfirmEmailId;
 	
+	@CacheLookup
 	@FindBy(how=How.XPATH,using="//td[contains(text(),'Type of User')]/following-sibling::td/select")
 	WebElement s_UserType;
 	
+	@CacheLookup
 	@FindBy(how=How.XPATH,using="//td[contains(text(),'Date of Birth')]/following-sibling::td/input")
 	WebElement d_DateOfBirth;
 	
+	@CacheLookup
 	@FindBy(how=How.XPATH,using="//td[contains(text(),'Gender')]/following-sibling::td/select")
 	WebElement s_Gender;
 	
+	@CacheLookup
 	@FindBy(how=How.XPATH,using="//input[@value='Register']")
 	WebElement b_Register;
 	
+	@CacheLookup
 	@FindBy(how=How.XPATH,using="//input[@value='View Users']")
 	WebElement b_ViewUsers;	
 	
+	@CacheLookup
 	@FindBy(how=How.XPATH,using="//input[@value='Auto-Fill data']")
 	WebElement b_AutoFillData;
 	
+	@CacheLookup
 	@FindBy(how=How.XPATH,using="//input[@value='Delete']")
 	WebElement b_DeleteRegisteredUsers;
 	
@@ -69,7 +83,8 @@ public class UserRegistrationPage extends BasePage{
 	/** PAGE BEHAVIORS **/
 	
 	public void load()
-	{
+	{ 
+	   this.Maximize();
 	   this.LoadPage(URL);
 	}
 	
@@ -164,7 +179,6 @@ public class UserRegistrationPage extends BasePage{
 	public boolean IsErrorDisplayed(String FieldName)
 	{
 		List<WebElement> Error=PageManager.getDriver().findElements(By.xpath("//td[contains(text(),'"+ FieldName +"')]/following-sibling::td/i"));
-		//System.out.println("//td[contains(text(),'"+ FieldName +"')]/following-sibling::td/i"+Error.size());
 		return Error.size()!=0;
 	}
 	
@@ -172,9 +186,19 @@ public class UserRegistrationPage extends BasePage{
 	{
 		WebElement Error=PageManager.getDriver().findElement(By.xpath("//td[contains(text(),'"+ FieldName +"')]/following-sibling::td[3]/span"));
 		element=Error;
-		//System.out.println("//td[contains(text(),'"+ FieldName +"')]/following-sibling::td/i" + this.GetText());
 		return this.GetText();
 		
 	}
+	
+	public String getAlertMessage()
+	{
+		return this.GetAlertContent();
+	}
+	
+	public void AcceptAlert()
+	{
+		this.CloseAlert();
+	}
+	
 	
 }

@@ -7,22 +7,19 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Properties;
 
-
-
-
-
 public class ConfigFileReader 
 {
 
 	private static Properties appConfig=null;
-
+	public static String rootpath;
 	
 	static
 	{
 		try 
 		{
 			
-			FileReader propertyFile= new FileReader(new File(".").getCanonicalPath()+"\\configs\\appconfig.properties");
+			rootpath=new File(".").getCanonicalPath();
+			FileReader propertyFile= new FileReader(rootpath+"\\configs\\appconfig.properties");
 			appConfig=new Properties();
 			appConfig.load(propertyFile);
 			
@@ -35,7 +32,9 @@ public class ConfigFileReader
 	
 	public static String getURL()
 	{
+		
 		return appConfig.getProperty("Appurl");
+		
 	}
 	
 	

@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import pages.UserRegistrationPage;
 
 
-public class PageManager {
+public class PageManager  {
 	
 	private static WebDriver driver=null;
 	private static UserRegistrationPage _page1=null;
@@ -22,6 +22,7 @@ public class PageManager {
 		switch(BrowserName)
 		{
 			case CHROME:
+				BrowserManager.autoDownloadChromeDriver();
 				driver=BrowserManager.getChromeDriver();
 			break;
 			

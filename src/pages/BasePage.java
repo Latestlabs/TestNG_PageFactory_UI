@@ -143,7 +143,8 @@ public class BasePage extends Page {
 
 	protected String GetAlertContent() {
 		// TODO Auto-generated method stub
-		return PageManager.getDriver().switchTo().alert().getText();
+		
+		return explicit_wait.until(ExpectedConditions.alertIsPresent()).getText();
 	}
 
 	protected void SetAlertContent(String text) {
@@ -151,10 +152,10 @@ public class BasePage extends Page {
 		PageManager.getDriver().switchTo().alert().sendKeys(text);
 	}
 
-	protected boolean CloseAlert(String Input) {
+	protected void CloseAlert() {
 		// TODO Auto-generated method stub
 		PageManager.getDriver().switchTo().alert().dismiss();
-		return PageManager.getDriver().switchTo().alert() == null;
+		 
 	}
 
 	protected boolean DoubleClick() {

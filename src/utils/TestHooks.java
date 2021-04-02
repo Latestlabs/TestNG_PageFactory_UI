@@ -1,5 +1,7 @@
 package utils;
 
+import java.io.IOException;
+
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
@@ -20,6 +22,7 @@ public class TestHooks {
 	public void BeforeSuiteLevel()
 	{
 		System.out.println("Before Suite");
+
 	}
 	
 	
@@ -40,15 +43,20 @@ public class TestHooks {
 	@BeforeMethod
 	public void BeforeMethodLevel()
 	{
+		
 		System.out.println("Before Method");
 	}
 	
 	
 	
 	@AfterSuite
-	public void AfterSuiteLevel()
+	public void AfterSuiteLevel() throws IOException
 	{
 		PageManager.getDriver().quit();
+		 if(System.getProperty("os.name").contains("Windows")) {
+	            Process process = Runtime. getRuntime(). exec("taskkill /F /IM chromedriver.exe /T");
+	            process.destroy();
+	    }
 	}
 	
 	
